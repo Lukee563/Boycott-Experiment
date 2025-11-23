@@ -3,8 +3,7 @@
 
 ## UCSC Econ165 - **Economics as an Experimental Science**
 
-This repository includes the analysis of the Consumer Boycott Game
-developed by **Vivian J. Zheng**. The Consumer Boycott Game concept
+This repository includes the analysis of the Consumer Boycott Game. The Consumer Boycott Game concept
 originated from Luke Catalano, Sadhika Agrawal and Derek Zhao in
 conjunction with Professor Kristian Lopez Vargas @ University of
 California, Santa Cruz.
