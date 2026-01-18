@@ -1,11 +1,13 @@
-# Consumer Boycott Experiment: Behavioral Analysis of Injunction Norms
+# Consumer Boycott Experiment
 
-### UCSC LEEPS - Learning and Experimental Economics Projects of Santa Cruz
 
-This repository contains the data analysis and experimental results for the Consumer Boycott Game, 
-a strategic interaction model developed in collaboration with Professor Kristian López Vargas 
-at UC Santa Cruz. The Consumer Boycott Game concept originated from Luke Catalano, 
-Sadhika Agrawal and Derek Zhao in conjunction with Vivian J. Zheng at UC Santa Cruz
+## UCSC Econ165 - **Economics as an Experimental Science**
+
+This repository includes the analysis of the Consumer Boycott Game
+developed by **Vivian J. Zheng**. The Consumer Boycott Game concept
+originated from Luke Catalano, Sadhika Agrawal and Derek Zhao in
+conjunction with Professor Kristian Lopez Vargas @ University of
+California, Santa Cruz.
 
 The Otree code and original documentation for the Consumer Boycott Game
 can be found in Vivian’s Boycott_Consumer Repository, detailing the
