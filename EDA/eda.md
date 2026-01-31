@@ -1,9 +1,3 @@
----
-title: "Exploratory Data Analysis"
-format: md
-editor: visual
----
-
 ## Research Questions:
 
 -   Are individuals willing to buy from a more expensive seller if the seller is considered ethical compared to an unethical seller offering the same good at a cheaper price.
