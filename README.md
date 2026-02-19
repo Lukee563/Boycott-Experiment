@@ -15,6 +15,10 @@ game’s core block components and the underlying experimental structure.
 This repository can be accessed here:
 <https://github.com/vivianzvz/boycott_consumer>
 
+### Limitations
+n = 24
+Participants were pulled from LEEPS participant pool, risking external validity. 
+
 ### Research Overview
 This study explores the intersection of Microeconomic Theory and Behavioral Economics, 
 specifically examining how social norms and information shocks regarding labor 
