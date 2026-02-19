@@ -15,10 +15,14 @@ game’s core block components and the underlying experimental structure.
 This repository can be accessed here:
 <https://github.com/vivianzvz/boycott_consumer>
 
-### Limitations
-n = 24
+## Limitations
+- Sample size is modest (n = 24), limiting statistical power.
 
-Participants were pulled from LEEPS participant pool, risking external validity. 
+- Participants were drawn from the UCSC LEEPs subject pool, restricting external validity to student populations.
+
+- The laboratory setting may overstate social-norm effects relative to real-world purchasing environments.
+
+- Sellers were artificially constructed within the experiment, which may not fully capture dynamics in real markets.
 
 ### Research Overview
 This study explores the intersection of Microeconomic Theory and Behavioral Economics, 
