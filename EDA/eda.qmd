@@ -27,7 +27,7 @@ block2 <- read.csv("data/block2_market_2025-06-04.csv") # Market Game
 library(dplyr)
 library(ggplot2)
 
-# Step 1: Count how many chose "B" in each treatment group
+# Step 1: Count how many choose "B" in each treatment group
 b_counts <- block2 %>%
   filter(player.buyer_choice == "B") %>%
   group_by(subsession.treatment) %>%
@@ -53,27 +53,122 @@ ggplot(b_counts, aes(x = subsession.treatment, y = num_B_voters)) +
   geom_text(aes(label = num_B_voters), vjust = -0.5, size = 5)
 ```
 
+```{r}
+# Break the experiment up into 3 distinct phases
+
+block2$choose_B <- ifelse(block2$player.buyer_choice == "B", 1, 0)
+
+phase1 <- block2 %>%
+  filter(index(block2) <= 24)
+
+phase2 <- block2 %>%
+  filter(index(block2) >= 25,
+         index(block2) <= 48,)
+
+phase3 <- block2 %>%
+  filter(index(block2) >= 49,
+         index(block2) <= 72,)
+```
+
+```{r}
+# Phase 1 (pre treatment) outcome variable 
+library(patchwork)
+
+p1 <- ggplot(data = phase1, aes(x = factor(choose_B))) +
+  geom_bar(fill = "deeppink3", width = 0.4) +
+  geom_text(
+    stat = "count",
+    aes(label = after_stat(count)),
+    vjust = -0.3,
+    size = 4
+  ) +
+  scale_x_discrete(labels = c("0" = "Chose A", "1" = "Chose B")) +
+  labs(
+    x = "Choice",
+    y = "Count",
+    title = "Phase 1 Outcome"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(plot.title = element_text(face = "bold"))+
+  scale_y_continuous(limits = c(0, 24))
+
+p2 <- ggplot(data = phase3, aes(x = factor(choose_B))) +
+  geom_bar(fill = "deeppink3", width = 0.4) +
+  geom_text(
+    stat = "count",
+    aes(label = after_stat(count)),
+    vjust = -0.3,
+    size = 4
+  ) +
+  scale_x_discrete(labels = c("0" = "Chose A", "1" = "Chose B")) +
+  labs(
+    x = "Choice",
+    y = "Count",
+    title = "Phase 2 Outcome"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(plot.title = element_text(face = "bold"))+
+  scale_y_continuous(limits = c(0, 24))
+
+p3 <- ggplot(data = phase2, aes(x = factor(choose_B))) +
+  geom_bar(fill = "deeppink3", width = 0.4) +
+  geom_text(
+    stat = "count",
+    aes(label = after_stat(count)),
+    vjust = -0.3,
+    size = 4
+  ) +
+  scale_x_discrete(labels = c("0" = "Chose A", "1" = "Chose B"))+
+  labs(
+    x = "Choice",
+    y = "Count",
+    title = "Phase 3 Outcome"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(plot.title = element_text(face = "bold"))+
+  scale_y_continuous(limits = c(0, 24))
+
+
+p1 + p2 + p3
+```
+
+\
+
+\
+
 ![]()
 
 ```{r}
 library(dplyr)
+# Phase dependent "Choose B" rates:
 
-block2 %>%
-  mutate(chose_B = player.buyer_choice == "B") %>%
-  group_by(subsession.treatment) %>%
-  summarise(
-    B_rate = mean(chose_B, na.rm = TRUE),
-    n = n()
-  )
+phases <- list(phase1, phase2, phase3) #data frame of each phase
+results <- c()
+counter <- 1
+
+for (i in phases){
+  results[counter] <- mean(i$choose_B)
+  counter <- counter + 1
+}
+
+pre_mean <- results[1]
+post_mean <- mean(results[2], results[3])
+diff <- abs(pre_mean - post_mean)
+
+cat("Difference in Pre vs Post means:", diff*100, "percentage points")
 ```
 
 ```{r}
-#Logicistic Regression Setup
-block2$chose_B <- ifelse(block2$player.buyer_choice == "B", 1, 0)
+library(sandwich)
+library(lmtest)
+library(zoo)
 
-#Model
-model1 <- glm(chose_B ~ subsession.treatment, data = block2, family = "binomial")
-summary(model1)
+block2$choose_B <- ifelse(block2$player.buyer_choice == "B", 1, 0)
+
+m <- glm(choose_B ~ subsession.treatment, data=block2, family=binomial())
+
+vc <- vcovCL(m, cluster = ~ participant.code)
+coeftest(m, vcov. = vc)
 ```
 
 ```{r}
