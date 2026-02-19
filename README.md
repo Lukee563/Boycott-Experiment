@@ -17,6 +17,7 @@ This repository can be accessed here:
 
 ### Limitations
 n = 24
+
 Participants were pulled from LEEPS participant pool, risking external validity. 
 
 ### Research Overview
